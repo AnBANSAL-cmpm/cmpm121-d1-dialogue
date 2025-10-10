@@ -8,3 +8,12 @@ document.body.innerHTML = `
 const button = document.createElement("button");
 button.textContent = "Talk";
 document.body.appendChild(button);
+let counter = 0;
+const counterDisplay = document.createElement("div");
+counterDisplay.textContent = `Clips: ${counter}`;
+document.body.appendChild(counterDisplay);
+
+button.addEventListener("click", () => {
+  counter++;
+  counterDisplay.textContent = `Clips: ${counter}`;
+});
