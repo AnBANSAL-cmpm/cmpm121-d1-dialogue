@@ -6,7 +6,7 @@ document.body.innerHTML = `
 `;
 
 const button = document.createElement("button");
-button.textContent = "Talk";
+button.textContent = "Click me to clip me!";
 document.body.appendChild(button);
 let counter = 0;
 const counterDisplay = document.createElement("div");
@@ -17,3 +17,7 @@ button.addEventListener("click", () => {
   counter++;
   counterDisplay.textContent = `Clips: ${counter}`;
 });
+setInterval(() => {
+  counter++;
+  counterDisplay.textContent = `Clips: ${counter}`;
+}, 1000);
