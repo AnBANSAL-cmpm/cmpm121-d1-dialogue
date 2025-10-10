@@ -21,3 +21,18 @@ setInterval(() => {
   counter++;
   counterDisplay.textContent = `Clips: ${counter}`;
 }, 1000);
+
+let lastTime = performance.now();
+
+const animate = (currentTime: number) => {
+  const deltaTime = currentTime - lastTime;
+  if (deltaTime >= 1000) { // ~1 second passed
+    counter++;
+    counterDisplay.textContent = `Clips: ${counter}`;
+    lastTime = currentTime;
+  }
+  requestAnimationFrame(animate);
+};
+requestAnimationFrame(animate);
+
+requestAnimationFrame(animate);
