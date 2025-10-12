@@ -1,38 +1,57 @@
 import exampleIconUrl from "./noun-paperclip-7598668-00449F.png";
 import "./style.css";
 
-document.body.innerHTML = `
-  <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
-`;
-
-const button = document.createElement("button");
-button.textContent = "Click me to clip me!";
-document.body.appendChild(button);
+// Track game state
 let counter = 0;
-const counterDisplay = document.createElement("div");
-counterDisplay.textContent = `Clips: ${counter}`;
-document.body.appendChild(counterDisplay);
+let growthRate = 0;
 
+// Create UI elements
+const button = document.createElement("button");
+button.textContent = "📎 Talk to AI";
+
+const counterDisplay = document.createElement("div");
+counterDisplay.textContent = `Paperclips: ${counter}`;
+
+const upgradeButton = document.createElement("button");
+upgradeButton.textContent = "Buy Auto-Clipper (10)";
+upgradeButton.disabled = true;
+
+// Append to page
+document.body.innerHTML = `<p>Example image: <img src="${exampleIconUrl}" class="icon" /></p>`;
+document.body.appendChild(button);
+document.body.appendChild(counterDisplay);
+document.body.appendChild(upgradeButton);
+
+// Update display
+const updateDisplay = () => {
+  counterDisplay.textContent = `Paperclips: ${counter}`;
+  upgradeButton.disabled = counter < 10;
+};
+
+// Click handler
 button.addEventListener("click", () => {
   counter++;
-  counterDisplay.textContent = `Clips: ${counter}`;
+  updateDisplay();
 });
-setInterval(() => {
-  counter++;
-  counterDisplay.textContent = `Clips: ${counter}`;
-}, 1000);
 
+// Upgrade handler
+upgradeButton.addEventListener("click", () => {
+  if (counter >= 10) {
+    counter -= 10;
+    growthRate++;
+    updateDisplay();
+  }
+});
+
+// Animation loop with accurate timing
 let lastTime = performance.now();
-
 const animate = (currentTime: number) => {
   const deltaTime = currentTime - lastTime;
-  if (deltaTime >= 1000) { // ~1 second passed
-    counter++;
-    counterDisplay.textContent = `Clips: ${counter}`;
+  if (deltaTime >= 1000) {
+    counter += growthRate;
+    updateDisplay();
     lastTime = currentTime;
   }
   requestAnimationFrame(animate);
 };
-requestAnimationFrame(animate);
-
 requestAnimationFrame(animate);
