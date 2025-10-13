@@ -39,7 +39,7 @@ const updateDisplay = () => {
   counterDisplay.textContent = `Clips: ${counter}`;
   upgradeButton.disabled = counter < 10;
   hairButton.disabled = counter < 20;
-  hairButton.disabled = counter < 30;
+  bullButton.disabled = counter < 30;
 };
 
 // Click to increase counter
@@ -65,7 +65,7 @@ hairButton.addEventListener("click", () => {
   }
 });
 
-hairButton.addEventListener("click", () => {
+bullButton.addEventListener("click", () => {
   if (counter >= 30) {
     counter -= 30;
     growthRate += 3;
