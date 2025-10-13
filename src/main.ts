@@ -8,6 +8,8 @@ let numPaper = 0;
 let numHair = 0;
 let numBull = 0;
 let paperPrice = 10;
+let hairPrice = 10;
+let bullPrice = 10;
 
 // Create UI elements
 
@@ -22,11 +24,11 @@ paperButton.textContent = `Buy Paper Clip (${paperPrice})`;
 paperButton.disabled = true; // Start disabled
 
 const hairButton = document.createElement("button");
-hairButton.textContent = "Buy Hair Clip (20)";
+hairButton.textContent = `Buy Hair Clip (${hairPrice})`;
 hairButton.disabled = true; // Start disabled
 
 const bullButton = document.createElement("button");
-bullButton.textContent = "Buy Bulldog Clip (30)";
+bullButton.textContent = `Buy Bulldog Clip (${bullPrice})`;
 bullButton.disabled = true; // Start disabled
 
 const growthDisplay = document.createElement("div");
@@ -62,9 +64,11 @@ const updateDisplay = () => {
   hairDisplay.textContent = `Hair Clips : ${numHair}`;
   bullDisplay.textContent = `Bull Clips : ${numBull}`;
   paperButton.disabled = counter < paperPrice;
-  hairButton.disabled = counter < 20;
-  bullButton.disabled = counter < 30;
+  hairButton.disabled = counter < hairPrice;
+  bullButton.disabled = counter < bullPrice;
   paperButton.textContent = `Buy Paper Clip (${paperPrice})`;
+  hairButton.textContent = `Buy Hair Clip (${hairPrice})`;
+  bullButton.textContent = `Buy Bull Clip (${bullPrice})`;
 };
 
 // Click to increase counter
@@ -85,19 +89,21 @@ paperButton.addEventListener("click", () => {
 });
 
 hairButton.addEventListener("click", () => {
-  if (counter >= 20) {
-    counter -= 20;
+  if (counter >= hairPrice) {
+    counter -= hairPrice;
     growthRate += 2;
     numHair++;
+    hairPrice *= 2;
     updateDisplay();
   }
 });
 
 bullButton.addEventListener("click", () => {
-  if (counter >= 30) {
-    counter -= 30;
+  if (counter >= bullPrice) {
+    counter -= bullPrice;
     growthRate += 3;
     numBull++;
+    bullPrice *= 3;
     updateDisplay();
   }
 });
