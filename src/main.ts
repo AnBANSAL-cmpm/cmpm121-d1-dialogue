@@ -50,6 +50,8 @@ document.body.appendChild(hairButton);
 document.body.appendChild(bullButton);
 document.body.appendChild(growthDisplay);
 document.body.appendChild(paperDisplay);
+document.body.appendChild(hairDisplay);
+document.body.appendChild(bullDisplay);
 
 // Update display function
 const updateDisplay = () => {
