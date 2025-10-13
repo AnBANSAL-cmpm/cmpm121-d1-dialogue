@@ -103,7 +103,7 @@ bullButton.addEventListener("click", () => {
     counter -= bullPrice;
     growthRate += 3;
     numBull++;
-    bullPrice *= 3;
+    bullPrice *= 2;
     updateDisplay();
   }
 });
