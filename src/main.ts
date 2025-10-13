@@ -25,6 +25,9 @@ const bullButton = document.createElement("button");
 bullButton.textContent = "Buy Bulldog-Clipper (30)";
 bullButton.disabled = true; // Start disabled
 
+const growthDisplay = document.createElement("div");
+growthDisplay.textContent = `Growth rate: ${growthRate}`;
+
 // Add content to page
 document.body.innerHTML =
   `<p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>`;
@@ -33,10 +36,12 @@ document.body.appendChild(counterDisplay);
 document.body.appendChild(upgradeButton);
 document.body.appendChild(hairButton);
 document.body.appendChild(bullButton);
+document.body.appendChild(growthDisplay);
 
 // Update display function
 const updateDisplay = () => {
   counterDisplay.textContent = `Clips: ${counter}`;
+  growthDisplay.textContent = `Growth rate: ${growthRate}`;
   upgradeButton.disabled = counter < 10;
   hairButton.disabled = counter < 20;
   bullButton.disabled = counter < 30;
