@@ -49,6 +49,7 @@ upgradeButton.addEventListener("click", () => {
     growthRate++;
     updateDisplay();
   }
+});
 
   hairButton.addEventListener("click", () => {
   if (counter >= 20) {
