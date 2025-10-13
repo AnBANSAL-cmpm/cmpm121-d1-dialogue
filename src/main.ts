@@ -7,6 +7,7 @@ let growthRate = 0;
 let numPaper = 0;
 let numHair = 0;
 let numBull = 0;
+let paperPrice = 10;
 
 // Create UI elements
 
@@ -17,7 +18,7 @@ const counterDisplay = document.createElement("div");
 counterDisplay.textContent = `Clips: ${counter}`;
 
 const paperButton = document.createElement("button");
-paperButton.textContent = "Buy Paper Clip (10)";
+paperButton.textContent = `Buy Paper Clip (${paperPrice})`;
 paperButton.disabled = true; // Start disabled
 
 const hairButton = document.createElement("button");
@@ -60,9 +61,10 @@ const updateDisplay = () => {
   paperDisplay.textContent = `Paper Clips : ${numPaper}`;
   hairDisplay.textContent = `Hair Clips : ${numHair}`;
   bullDisplay.textContent = `Bull Clips : ${numBull}`;
-  paperButton.disabled = counter < 10;
+  paperButton.disabled = counter < paperPrice;
   hairButton.disabled = counter < 20;
   bullButton.disabled = counter < 30;
+  paperButton.textContent = `Buy Paper Clip (${paperPrice})`;
 };
 
 // Click to increase counter
@@ -73,10 +75,11 @@ clickButton.addEventListener("click", () => {
 
 // increment
 paperButton.addEventListener("click", () => {
-  if (counter >= 10) {
-    counter -= 10;
+  if (counter >= paperPrice) {
+    counter -= paperPrice;
     growthRate++;
     numPaper++;
+    paperPrice *= 2;
     updateDisplay();
   }
 });
