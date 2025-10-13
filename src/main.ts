@@ -8,8 +8,8 @@ let numPaper = 0;
 let numHair = 0;
 let numBull = 0;
 let paperPrice = 10;
-let hairPrice = 10;
-let bullPrice = 10;
+let hairPrice = 20;
+let bullPrice = 30;
 
 // Create UI elements
 
