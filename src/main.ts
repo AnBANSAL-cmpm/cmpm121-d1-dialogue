@@ -66,7 +66,7 @@ paperButton.addEventListener("click", () => {
   if (counter >= 10) {
     counter -= 10;
     growthRate++;
-    numPaper ++;
+    numPaper++;
     updateDisplay();
   }
 });
