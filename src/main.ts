@@ -4,6 +4,9 @@ import "./style.css";
 // Set initial game state
 let counter = 0;
 let growthRate = 0;
+let numPaper = 0;
+let numHair = 0;
+let numBull = 0;
 
 // Create UI elements
 
@@ -13,36 +16,41 @@ clickButton.textContent = "Click me to clip me!";
 const counterDisplay = document.createElement("div");
 counterDisplay.textContent = `Clips: ${counter}`;
 
-const upgradeButton = document.createElement("button");
-upgradeButton.textContent = "Buy Auto-Clipper (10)";
-upgradeButton.disabled = true; // Start disabled
+const paperButton = document.createElement("button");
+paperButton.textContent = "Buy Paper Clip (10)";
+paperButton.disabled = true; // Start disabled
 
 const hairButton = document.createElement("button");
-hairButton.textContent = "Buy Hair-Clipper (20)";
+hairButton.textContent = "Buy Hair Clip (20)";
 hairButton.disabled = true; // Start disabled
 
 const bullButton = document.createElement("button");
-bullButton.textContent = "Buy Bulldog-Clipper (30)";
+bullButton.textContent = "Buy Bulldog Clip (30)";
 bullButton.disabled = true; // Start disabled
 
 const growthDisplay = document.createElement("div");
 growthDisplay.textContent = `Growth rate: ${growthRate}`;
+
+const paperDisplay = document.createElement("div");
+paperDisplay.textContent = `Paper Clips : ${numPaper}`;
 
 // Add content to page
 document.body.innerHTML =
   `<p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>`;
 document.body.appendChild(clickButton);
 document.body.appendChild(counterDisplay);
-document.body.appendChild(upgradeButton);
+document.body.appendChild(paperButton);
 document.body.appendChild(hairButton);
 document.body.appendChild(bullButton);
 document.body.appendChild(growthDisplay);
+document.body.appendChild(numPaper);
 
 // Update display function
 const updateDisplay = () => {
   counterDisplay.textContent = `Clips: ${counter}`;
   growthDisplay.textContent = `Growth rate: ${growthRate}`;
-  upgradeButton.disabled = counter < 10;
+  paperDisplay.textContent = `Paper Clips : ${numPaper}`;
+  paperButton.disabled = counter < 10;
   hairButton.disabled = counter < 20;
   bullButton.disabled = counter < 30;
 };
@@ -53,11 +61,12 @@ clickButton.addEventListener("click", () => {
   updateDisplay();
 });
 
-// Purchase auto-increment upgrade
-upgradeButton.addEventListener("click", () => {
+// increment
+paperButton.addEventListener("click", () => {
   if (counter >= 10) {
     counter -= 10;
     growthRate++;
+    numPaper ++;
     updateDisplay();
   }
 });
