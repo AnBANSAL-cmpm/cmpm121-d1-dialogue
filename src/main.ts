@@ -38,7 +38,7 @@ const hairDisplay = document.createElement("div");
 hairDisplay.textContent = `Hair Clips : ${numHair}`;
 
 const bullDisplay = document.createElement("div");
-bullDisplay.textContent = `Bull Clips : ${numBull}`:
+bullDisplay.textContent = `Bull Clips : ${numBull}`;
 
 // Add content to page
 document.body.innerHTML =
