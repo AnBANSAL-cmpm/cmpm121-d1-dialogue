@@ -5,8 +5,8 @@ import "./style.css";
 let counter = 0;
 let growthRate = 0;
 let numPaper = 0;
-let numHair = 0;
-let numBull = 0;
+//let numHair = 0;
+//let numBull = 0;
 
 // Create UI elements
 
