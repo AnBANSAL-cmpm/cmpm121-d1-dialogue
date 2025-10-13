@@ -17,17 +17,23 @@ const upgradeButton = document.createElement("button");
 upgradeButton.textContent = "Buy Auto-Clipper (10)";
 upgradeButton.disabled = true; // Start disabled
 
+const hairButton = document.createElement("button");
+hairButton.textContent = "Buy Hair-Clipper (20)";
+hairButton.disabled = true; // Start disabled
+
 // Add content to page
 document.body.innerHTML =
   `<p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>`;
 document.body.appendChild(clickButton);
 document.body.appendChild(counterDisplay);
 document.body.appendChild(upgradeButton);
+document.body.appendChild(hairButton);
 
 // Update display function
 const updateDisplay = () => {
   counterDisplay.textContent = `Clips: ${counter}`;
   upgradeButton.disabled = counter < 10;
+  hairButton.disabled = counter < 20;
 };
 
 // Click to increase counter
@@ -41,6 +47,13 @@ upgradeButton.addEventListener("click", () => {
   if (counter >= 10) {
     counter -= 10;
     growthRate++;
+    updateDisplay();
+  }
+
+  hairButton.addEventListener("click", () => {
+  if (counter >= 20) {
+    counter -= 20;
+    growthRate += 2;
     updateDisplay();
   }
 });
