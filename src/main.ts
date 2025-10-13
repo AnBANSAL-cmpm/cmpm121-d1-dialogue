@@ -18,7 +18,7 @@ upgradeButton.textContent = "Buy Auto-Clipper (10)";
 upgradeButton.disabled = true; // Start disabled
 
 // Add content to page
-document.body.innerHTML = 
+document.body.innerHTML =
   `<p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>`;
 document.body.appendChild(clickButton);
 document.body.appendChild(counterDisplay);
