@@ -5,8 +5,8 @@ import "./style.css";
 let counter = 0;
 let growthRate = 0;
 let numPaper = 0;
-//let numHair = 0;
-//let numBull = 0;
+let numHair = 0;
+let numBull = 0;
 
 // Create UI elements
 
@@ -34,6 +34,12 @@ growthDisplay.textContent = `Growth rate: ${growthRate}`;
 const paperDisplay = document.createElement("div");
 paperDisplay.textContent = `Paper Clips : ${numPaper}`;
 
+const hairDisplay = document.createElement("div");
+hairDisplay.textContent = `Hair Clips : ${numHair}`;
+
+const bullDisplay = document.createElement("div");
+bullDisplay.textContent = `Bull Clips : ${numBull}`:
+
 // Add content to page
 document.body.innerHTML =
   `<p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>`;
@@ -50,6 +56,8 @@ const updateDisplay = () => {
   counterDisplay.textContent = `Clips: ${counter}`;
   growthDisplay.textContent = `Growth rate: ${growthRate}`;
   paperDisplay.textContent = `Paper Clips : ${numPaper}`;
+  hairDisplay.textContent = `Hair Clips : ${numHair}`;
+  bullDisplay.textContent = `Bull Clips : ${numBull}`;
   paperButton.disabled = counter < 10;
   hairButton.disabled = counter < 20;
   bullButton.disabled = counter < 30;
@@ -75,6 +83,7 @@ hairButton.addEventListener("click", () => {
   if (counter >= 20) {
     counter -= 20;
     growthRate += 2;
+    numHair++;
     updateDisplay();
   }
 });
@@ -83,6 +92,7 @@ bullButton.addEventListener("click", () => {
   if (counter >= 30) {
     counter -= 30;
     growthRate += 3;
+    numBull++;
     updateDisplay();
   }
 });
