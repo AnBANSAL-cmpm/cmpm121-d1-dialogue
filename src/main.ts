@@ -43,7 +43,7 @@ document.body.appendChild(paperButton);
 document.body.appendChild(hairButton);
 document.body.appendChild(bullButton);
 document.body.appendChild(growthDisplay);
-document.body.appendChild(numPaper);
+document.body.appendChild(paperDisplay);
 
 // Update display function
 const updateDisplay = () => {
