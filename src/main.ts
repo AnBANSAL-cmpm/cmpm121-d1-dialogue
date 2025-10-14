@@ -55,7 +55,8 @@ const updateDisplay = () => {
 };
 
 // Build Page Content
-document.body.innerHTML = `<p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>`;
+document.body.innerHTML = 
+  `<p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>`;
 document.body.appendChild(clickButton);
 document.body.appendChild(counterDisplay);
 document.body.appendChild(growthDisplay);
