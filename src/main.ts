@@ -17,11 +17,46 @@ let growthRate = 0;
 
 //upgrade items
 const availableItems: Item[] = [
-  { name: "Paper Clip", baseCost: 10, rate: 1, count: 0, price: 10, description: "Still holding on by a thread with the original" },
-  { name: "Staple Clip", baseCost: 20, rate: 2, count: 0, price: 20, description: "More commitment to durability" },
-  { name: "Magnetic Clip", baseCost: 30, rate: 3, count: 0, price: 30, description: "Magnetics are too cool" },
-  { name: "Binder Clip", baseCost: 40, rate: 4, count: 0, price: 40, description: "Organizational Justice" },
-  { name: "Claw Clip", baseCost: 50, rate: 5, count: 0, price: 50, description: "The beast that will attach way more" },
+  {
+    name: "Paper Clip",
+    baseCost: 10,
+    rate: 1,
+    count: 0,
+    price: 10,
+    description: "Still holding on by a thread with the original",
+  },
+  {
+    name: "Staple Clip",
+    baseCost: 20,
+    rate: 2,
+    count: 0,
+    price: 20,
+    description: "More commitment to durability",
+  },
+  {
+    name: "Magnetic Clip",
+    baseCost: 30,
+    rate: 3,
+    count: 0,
+    price: 30,
+    description: "Magnetics are too cool",
+  },
+  {
+    name: "Binder Clip",
+    baseCost: 40,
+    rate: 4,
+    count: 0,
+    price: 40,
+    description: "Organizational Justice",
+  },
+  {
+    name: "Claw Clip",
+    baseCost: 50,
+    rate: 5,
+    count: 0,
+    price: 50,
+    description: "The beast that will attach way more",
+  },
 ];
 
 // UI Elements
