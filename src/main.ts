@@ -76,7 +76,7 @@ availableItems.forEach((item) => {
       counter -= item.price;
       growthRate += item.rate;
       item.count++;
-      item.price = Math.ceil(item.baseCost * Math.pow(1.15, item.count)); // price grows 15% each purchase
+      item.price *= 2;
       updateDisplay();
     }
   });
