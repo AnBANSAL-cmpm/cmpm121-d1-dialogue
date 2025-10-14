@@ -1,114 +1,102 @@
 import exampleIconUrl from "./noun-paperclip-7598668-00449F.png";
 import "./style.css";
 
-// Set initial game state
+// Types Interface
+interface Item {
+  name: string;
+  baseCost: number;
+  rate: number;
+  count: number;
+  price: number; // current price
+}
+
+// Game State
 let counter = 0;
 let growthRate = 0;
-let numPaper = 0;
-let numHair = 0;
-let numBull = 0;
-let paperPrice = 10;
-let hairPrice = 20;
-let bullPrice = 30;
 
-// Create UI elements
+//upgrade items
+const availableItems: Item[] = [
+  { name: "Paper Clip", baseCost: 10, rate: 1, count: 0, price: 10 },
+  { name: "Hair Clip", baseCost: 20, rate: 2, count: 0, price: 20 },
+  { name: "Bulldog Clip", baseCost: 30, rate: 3, count: 0, price: 30 },
+];
 
+// UI Elements
 const clickButton = document.createElement("button");
 clickButton.textContent = "Click me to clip me!";
 
 const counterDisplay = document.createElement("div");
 counterDisplay.textContent = `Clips: ${counter}`;
 
-const paperButton = document.createElement("button");
-paperButton.textContent = `Buy Paper Clip (${paperPrice})`;
-paperButton.disabled = true; // Start disabled
-
-const hairButton = document.createElement("button");
-hairButton.textContent = `Buy Hair Clip (${hairPrice})`;
-hairButton.disabled = true; // Start disabled
-
-const bullButton = document.createElement("button");
-bullButton.textContent = `Buy Bulldog Clip (${bullPrice})`;
-bullButton.disabled = true; // Start disabled
-
 const growthDisplay = document.createElement("div");
 growthDisplay.textContent = `Growth rate: ${growthRate}`;
 
-const paperDisplay = document.createElement("div");
-paperDisplay.textContent = `Paper Clips : ${numPaper}`;
+// To hold each item’s button + display elements
+const itemElements: {
+  button: HTMLButtonElement;
+  display: HTMLDivElement;
+}[] = [];
 
-const hairDisplay = document.createElement("div");
-hairDisplay.textContent = `Hair Clips : ${numHair}`;
+// Helper Functions
+const updateItemButton = (button: HTMLButtonElement, item: Item) => {
+  button.textContent = `Buy ${item.name} (${item.price})`;
+  button.disabled = counter < item.price;
+};
 
-const bullDisplay = document.createElement("div");
-bullDisplay.textContent = `Bull Clips : ${numBull}`;
-
-// Add content to page
-document.body.innerHTML =
-  `<p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>`;
-document.body.appendChild(clickButton);
-document.body.appendChild(counterDisplay);
-document.body.appendChild(paperButton);
-document.body.appendChild(hairButton);
-document.body.appendChild(bullButton);
-document.body.appendChild(growthDisplay);
-document.body.appendChild(paperDisplay);
-document.body.appendChild(hairDisplay);
-document.body.appendChild(bullDisplay);
-
-// Update display function
+// Called every frame to update the whole display
 const updateDisplay = () => {
   counterDisplay.textContent = `Clips: ${counter}`;
   growthDisplay.textContent = `Growth rate: ${growthRate}`;
-  paperDisplay.textContent = `Paper Clips : ${numPaper}`;
-  hairDisplay.textContent = `Hair Clips : ${numHair}`;
-  bullDisplay.textContent = `Bull Clips : ${numBull}`;
-  paperButton.disabled = counter < paperPrice;
-  hairButton.disabled = counter < hairPrice;
-  bullButton.disabled = counter < bullPrice;
-  paperButton.textContent = `Buy Paper Clip (${paperPrice})`;
-  hairButton.textContent = `Buy Hair Clip (${hairPrice})`;
-  bullButton.textContent = `Buy Bull Clip (${bullPrice})`;
+  itemElements.forEach((el, i) => {
+    const item = availableItems[i];
+    el.display.textContent = `${item.name}s: ${item.count}`;
+    updateItemButton(el.button, item);
+  });
 };
 
-// Click to increase counter
+// Build Page Content
+document.body.innerHTML = `<p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>`;
+document.body.appendChild(clickButton);
+document.body.appendChild(counterDisplay);
+document.body.appendChild(growthDisplay);
+
+// Create all item buttons and displays dynamically
+availableItems.forEach((item) => {
+  const button = document.createElement("button");
+  const display = document.createElement("div");
+
+  // Initialize text
+  updateItemButton(button, item);
+  display.textContent = `${item.name}s: ${item.count}`;
+
+  // Purchase event
+  button.addEventListener("click", () => {
+    if (counter >= item.price) {
+      counter -= item.price;
+      growthRate += item.rate;
+      item.count++;
+      item.price = Math.ceil(item.baseCost * Math.pow(1.15, item.count)); // price grows 15% each purchase
+      updateDisplay();
+    }
+  });
+
+  // Add to page
+  document.body.appendChild(button);
+  document.body.appendChild(display);
+
+  // Track for later updates
+  itemElements.push({ button, display });
+});
+
+// Game Logic
+
+// Clicking adds to counter manually
 clickButton.addEventListener("click", () => {
   counter++;
   updateDisplay();
 });
 
-// increment
-paperButton.addEventListener("click", () => {
-  if (counter >= paperPrice) {
-    counter -= paperPrice;
-    growthRate++;
-    numPaper++;
-    paperPrice *= 2;
-    updateDisplay();
-  }
-});
-
-hairButton.addEventListener("click", () => {
-  if (counter >= hairPrice) {
-    counter -= hairPrice;
-    growthRate += 2;
-    numHair++;
-    hairPrice *= 2;
-    updateDisplay();
-  }
-});
-
-bullButton.addEventListener("click", () => {
-  if (counter >= bullPrice) {
-    counter -= bullPrice;
-    growthRate += 3;
-    numBull++;
-    bullPrice *= 2;
-    updateDisplay();
-  }
-});
-
-// Animation loop with delta time
+// Passive income loop
 let lastTime = performance.now();
 
 const animate = (currentTime: number) => {
