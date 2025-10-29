@@ -81,7 +81,7 @@ const itemElements: {
   display: HTMLDivElement;
 }[] = [];
 
-// Called every frame to update the whole display
+// Updates all UI elements to reflect current game state; called on each animation frame
 const updateDisplay = () => {
   counterDisplay.textContent = `Clips: ${counter}`;
   growthDisplay.textContent = `Growth rate: ${growthRate}`;
