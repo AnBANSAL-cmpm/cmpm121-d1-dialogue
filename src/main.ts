@@ -12,7 +12,7 @@ interface Item {
 }
 
 // State
-let counter = 0;
+let clipCount = 0;
 let growthRate = 0;
 
 // Items
@@ -64,7 +64,7 @@ const clickButton = document.createElement("button");
 clickButton.textContent = "Click me to clip me!";
 
 const counterDisplay = document.createElement("div");
-counterDisplay.textContent = `Clips: ${counter}`;
+counterDisplay.textContent = `Clips: ${clipCount}`;
 
 const growthDisplay = document.createElement("div");
 growthDisplay.textContent = `Growth rate: ${growthRate}`;
@@ -72,7 +72,7 @@ growthDisplay.textContent = `Growth rate: ${growthRate}`;
 // Helper Functions
 const updateItemButton = (button: HTMLButtonElement, item: Item) => {
   button.textContent = `Buy ${item.name} (${item.price})`;
-  button.disabled = counter < item.price;
+  button.disabled = clipCount < item.price;
 };
 
 // To hold each item’s button + display elements
@@ -83,7 +83,7 @@ const itemElements: {
 
 // Updates all UI elements to reflect current game state; called on each animation frame
 const updateDisplay = () => {
-  counterDisplay.textContent = `Clips: ${counter}`;
+  counterDisplay.textContent = `Clips: ${clipCount}`;
   growthDisplay.textContent = `Growth rate: ${growthRate}`;
   itemElements.forEach((el, i) => {
     const item = availableItems[i];
@@ -110,8 +110,8 @@ availableItems.forEach((item) => {
 
   // Purchase event
   button.addEventListener("click", () => {
-    if (counter >= item.price) {
-      counter -= item.price;
+    if (clipCount >= item.price) {
+      clipCount -= item.price;
       growthRate += item.rate;
       item.count++;
       item.price *= 2;
@@ -131,7 +131,7 @@ availableItems.forEach((item) => {
 
 // Clicking adds to counter manually
 clickButton.addEventListener("click", () => {
-  counter++;
+  clipCount++;
   updateDisplay();
 });
 
@@ -141,7 +141,7 @@ let lastTime = performance.now();
 const animate = (currentTime: number) => {
   const deltaTime = currentTime - lastTime;
   if (deltaTime >= 1000) {
-    counter += growthRate;
+    clipCount += growthRate;
     updateDisplay();
     lastTime = currentTime;
   }
