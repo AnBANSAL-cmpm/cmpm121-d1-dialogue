@@ -1,7 +1,7 @@
 import exampleIconUrl from "./noun-paperclip-7598668-00449F.png";
 import "./style.css";
 
-// Types Interface
+// Types
 interface Item {
   name: string;
   baseCost: number;
@@ -11,11 +11,11 @@ interface Item {
   description: string;
 }
 
-// Game State
+// State
 let counter = 0;
 let growthRate = 0;
 
-//upgrade items
+// Items
 const availableItems: Item[] = [
   {
     name: "Paper Clip",
@@ -69,17 +69,17 @@ counterDisplay.textContent = `Clips: ${counter}`;
 const growthDisplay = document.createElement("div");
 growthDisplay.textContent = `Growth rate: ${growthRate}`;
 
-// To hold each item’s button + display elements
-const itemElements: {
-  button: HTMLButtonElement;
-  display: HTMLDivElement;
-}[] = [];
-
 // Helper Functions
 const updateItemButton = (button: HTMLButtonElement, item: Item) => {
   button.textContent = `Buy ${item.name} (${item.price})`;
   button.disabled = counter < item.price;
 };
+
+// To hold each item’s button + display elements
+const itemElements: {
+  button: HTMLButtonElement;
+  display: HTMLDivElement;
+}[] = [];
 
 // Called every frame to update the whole display
 const updateDisplay = () => {
