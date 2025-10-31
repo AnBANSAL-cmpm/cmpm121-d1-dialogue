@@ -11,6 +11,12 @@ interface Item {
   description: string;
 }
 
+// --- Breathing animation variables ---
+let iconScale = 1;
+let scaleRate = 0.0015;
+const minScale = 1;
+const maxScale = 1.1;
+
 // State
 let clipCount = 0;
 let growthRate = 0;
@@ -93,16 +99,25 @@ const updateDisplay = () => {
 };
 
 // Build Page Content
-document.body.innerHTML =
+// Build Page Content
+document.body.innerHTML = ""; // start clean
+const imageContainer = document.createElement("div");
+imageContainer.innerHTML =
   `<p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>`;
+document.body.appendChild(imageContainer);
+
 document.body.appendChild(clickButton);
 document.body.appendChild(counterDisplay);
 document.body.appendChild(growthDisplay);
 
 // Create all item buttons and displays dynamically
+// Create all item buttons and displays dynamically
 availableItems.forEach((item) => {
   const button = document.createElement("button");
   const display = document.createElement("div");
+
+  // ✅ Add gray button styling
+  button.classList.add("upgrade-btn");
 
   // Initialize text
   updateItemButton(button, item);
@@ -144,6 +159,16 @@ const animate = (currentTime: number) => {
     clipCount += growthRate;
     updateDisplay();
     lastTime = currentTime;
+  }
+
+  // --- Add breathing animation to the main icon ---
+  const iconElement = document.querySelector(".icon") as HTMLElement;
+  if (iconElement) {
+    iconScale += scaleRate * (deltaTime / 16.67); // normalize for smoothness
+    if (iconScale > maxScale || iconScale < minScale) {
+      scaleRate *= -1; // reverse direction when limits hit
+    }
+    iconElement.style.transform = `scale(${iconScale})`;
   }
   requestAnimationFrame(animate);
 };
